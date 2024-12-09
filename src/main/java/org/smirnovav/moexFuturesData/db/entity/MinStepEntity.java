@@ -22,4 +22,13 @@ public class MinStepEntity {
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "shortName")
     private Set<FuturesEntity> futuresEntities;
 
+    public void addFuturesEntity(FuturesEntity futuresEntity) {
+        if (futuresEntities == null) {
+            futuresEntities = Set.of(futuresEntity);
+        } else {
+            futuresEntities.add(futuresEntity);
+        }
+    }
+
+
 }

@@ -22,4 +22,11 @@ public class AssetCodeEntity {
     private Set<FuturesEntity> futuresEntities;
 
 
+    public void addFuturesEntity(FuturesEntity futuresEntity) {
+        if (futuresEntities == null) {
+            futuresEntities = Set.of(futuresEntity);
+        } else {
+            futuresEntities.add(futuresEntity);
+        }
+    }
 }

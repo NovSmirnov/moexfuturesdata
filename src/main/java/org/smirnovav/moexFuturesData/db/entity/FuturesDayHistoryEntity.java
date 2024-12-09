@@ -16,10 +16,11 @@ import java.util.Calendar;
 public class FuturesDayHistoryEntity {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "futuresdayhistoryid")
     private long futuresDayHistoryId;
 
-    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, fetch = FetchType.EAGER)
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "shortname", nullable = false)
     private FuturesEntity futuresEntity;
 

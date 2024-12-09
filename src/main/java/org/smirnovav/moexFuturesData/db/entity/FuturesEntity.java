@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.util.Calendar;
+import java.util.List;
 
 @Builder
 @AllArgsConstructor
@@ -17,7 +18,7 @@ public class FuturesEntity {
     @Column(name = "secid")
     private String secId; //Краткий код
     @JoinColumn(name = "boardname", nullable = false)
-    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, fetch = FetchType.EAGER)
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private BoardIdEntity boardIdEntity; // Board на бирже
     @Id
     @Column(name = "shortname")
@@ -25,15 +26,15 @@ public class FuturesEntity {
     @Column(name = "secname")
     private String secName; //Полное имя бумаги
     @JoinColumn(name = "decimals", nullable = false)
-    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, fetch = FetchType.EAGER)
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private DecimalsEntity decimalsEntity; //Количество знаков после запятой
     @JoinColumn(name = "minstep", nullable = false)
-    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, fetch = FetchType.EAGER)
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private MinStepEntity minStepEntity; //Шаг цены
     @Column(name = "latname")
     private String latName; // Английское имя бумаги
     @JoinColumn(name = "sectype", nullable = false)
-    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, fetch = FetchType.EAGER)
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private SecTypeEntity secTypeEntity; //База краткого кода
     @Column(name = "prevprice")
     private double prevPrice; //Последняя цена
@@ -44,7 +45,7 @@ public class FuturesEntity {
     @Column(name = "lastdeldate")
     private Calendar lastDelDate; // Дата исполнения
     @JoinColumn(name = "assetcode", nullable = false)
-    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, fetch = FetchType.EAGER)
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private AssetCodeEntity assetCodeEntity; // База краткого наименования контракта (GAZR)
     @Column(name = "prevopenposition")
     private int prevOpenPosition; // Количество открытых позициций
@@ -71,8 +72,10 @@ public class FuturesEntity {
     @Column(name = "exercisefee")
     private double exerciseFee; //Клиринговая комиссия за исполенние контракта
     @OneToOne(mappedBy = "futuresEntity", cascade = CascadeType.ALL, optional = false,
-    fetch = FetchType.LAZY)
+    fetch = FetchType.EAGER)
     private FuturesMarketDataEntity futuresMarketDataEntity;
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "futuresDayHistoryId")
+    private List<FuturesDayHistoryEntity> futuresDayHistoryEntityList;
 
 
 

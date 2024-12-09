@@ -64,10 +64,15 @@
 			<artifactId>sqlite-jdbc</artifactId>
 			<version>3.41.2.2</version>
 		</dependency>
+<!--		<dependency>-->
+<!--			<groupId>org.hibernate.orm</groupId>-->
+<!--			<artifactId>hibernate-community-dialects</artifactId>-->
+<!--			<version>7.0.0.Beta2</version>-->
+<!--		</dependency>-->
 		<dependency>
 			<groupId>org.hibernate.orm</groupId>
 			<artifactId>hibernate-community-dialects</artifactId>
-			<version>7.0.0.Beta2</version>
+			<version>6.6.2.Final</version>
 		</dependency>
 		<dependency>
 			<groupId>com.github.NovSmirnov</groupId>

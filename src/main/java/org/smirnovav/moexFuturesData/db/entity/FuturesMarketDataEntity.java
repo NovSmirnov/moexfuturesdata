@@ -15,10 +15,11 @@ import java.util.Calendar;
 @Table(name = "futuresmarketdata")
 public class FuturesMarketDataEntity {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "futuresmarketdataid")
     private long futuresMarketDataId;
 //    @JoinColumn(name = "shortname")
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.EAGER)
     private FuturesEntity futuresEntity;
     @Column(name = "bid")
     private double bid; // Спрос
