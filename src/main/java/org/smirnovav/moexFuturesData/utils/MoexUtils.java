@@ -21,10 +21,13 @@ public class MoexUtils {
 
         List<IntegratedFuturesInfoDto> integratedFuturesInfoDtos = new ArrayList<>();
         Set<String> secIds = SecurityUtils.getAllTradingFutures();
+        int counter = 1;
         for (String secId : secIds) {
-
+            Helpers.printAngCarriageGoBack("SecId #" + counter + " = " + secId);
+            counter++;
             integratedFuturesInfoDtos.add(getIntegratedFuturesInfo(secId, historyStartDate, historyFinishDate));
         }
+        System.out.print("\n");
         return integratedFuturesInfoDtos;
     }
 

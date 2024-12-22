@@ -21,7 +21,7 @@ public class FuturesDayHistoryEntity {
     private long futuresDayHistoryId;
 
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinColumn(name = "shortname", nullable = false)
+    @JoinColumn(name = "shortname", nullable = true)
     private FuturesEntity futuresEntity;
 
 //    private String boardId; // Режим торгов

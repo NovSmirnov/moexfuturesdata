@@ -88,6 +88,44 @@ public class FuturesMarketDataEntity {
     @Column(name = "swaprate")
     private double swapRate; // ???
 
+    public void update(FuturesMarketDataEntity futuresMarketDataEntity) {
+//        futuresMarketDataId = futuresMarketDataEntity.;
+//        futuresEntity = futuresMarketDataEntity.futuresEntity;
+        bid = futuresMarketDataEntity.getBid(); // Спрос
+        offer = futuresMarketDataEntity.getOffer(); // Предложение
+        offerDepth = futuresMarketDataEntity.getOfferDepth(); // Объем заявок на продажу по лучшей котировке, выраженный в лотах
+        offerDeptht = futuresMarketDataEntity.getOfferDeptht(); // Объем всех заявок на продажу в очереди торговой системы, выраженный в лотах
+        spread = futuresMarketDataEntity.getSpread(); // Разница между ценой покупки и ценой продажи
+        open = futuresMarketDataEntity.getOpen(); // Цена открытия
+        low = futuresMarketDataEntity.getLow(); // Минимальная цена
+        high = futuresMarketDataEntity.getHigh(); // Максимальная цена
+        last = futuresMarketDataEntity.getLast(); // Последняя цена
+        lastChange = futuresMarketDataEntity.getLastChange(); // Изменение цены последней сделки по отношению к цене последней сделки предыдущего дня
+        numTrades = futuresMarketDataEntity.getNumTrades(); // Количество сделок за торговый день
+        volToday = futuresMarketDataEntity.getVolToday(); // Объем сделок за сегодня в количестве ценных бумаг
+        valToday = futuresMarketDataEntity.getValToday(); // Объем сделок за сегодня в валюте расчетов
+        valTodayUsd = futuresMarketDataEntity.getValTodayUsd(); // Объем сделок за сегодня в долларах США
+        lastChangePrcnt = futuresMarketDataEntity.getLastChangePrcnt(); // Изменение цены последней сделки по отношению к цене последней сделки предыдущего дня в процентах
+        bidDepth = futuresMarketDataEntity.getBidDepth(); // Объем заявок на покупку по лучшей котировке, выраженный в лотах
+        bidDeptht = futuresMarketDataEntity.getBidDeptht(); // Объем всех заявок на покупку в очереди торговой системы, выраженный в лотах
+        numOffers = futuresMarketDataEntity.getNumOffers(); // Количество заявок на продажу в очереди торговой системы
+        numBids = futuresMarketDataEntity.getNumBids(); // Количество заявок на покупку в очереди торговой системы
+        time = futuresMarketDataEntity.getTime(); // Время заключения последней сделки
+        seqNum = futuresMarketDataEntity.getSeqNum(); // Некий 14-значный номер обозначающий дату и время последней сделки в формате yyyyMMddhhmmss
+        sysTime = futuresMarketDataEntity.getSysTime(); // Системное время
+        updateTime = futuresMarketDataEntity.getUpdateTime(); // Время обновления
+        openPeriodPrice = futuresMarketDataEntity.getOpenPeriodPrice(); // Цена предторгового периода или аукциона открытия
+        lastToPrevPrice = futuresMarketDataEntity.getLastToPrevPrice(); // ???
+        quantity = futuresMarketDataEntity.getQuantity(); // Объем выраженный в лотах
+        settlePrice = futuresMarketDataEntity.getSettlePrice(); // Расчетная цена
+        settleToPrevSettle = futuresMarketDataEntity.getSettleToPrevSettle(); // Разница текущей установленной цены к предыдущей
+        openPosition = futuresMarketDataEntity.getOpenPosition(); // Количество открытых позиций
+        settleToPrevSettlePrc = futuresMarketDataEntity.getSettleToPrevSettlePrc(); // Разница текущей установленной цены к предыдущей в процентах
+        tradeDate = futuresMarketDataEntity.getTradeDate(); // Дата сделки
+        oiChange = futuresMarketDataEntity.getOiChange(); // ???
+        swapRate = futuresMarketDataEntity.getSwapRate(); // ???
+    }
+
 
 
 

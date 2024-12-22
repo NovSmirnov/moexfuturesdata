@@ -39,6 +39,11 @@
 			<id>jitpack.io</id>
 			<url>https://jitpack.io</url>
 		</repository>
+		<repository>
+			<id>clojars</id>
+			<name>org.clojars</name>
+			<url>https://repo.clojars.org/</url>
+		</repository>
 	</repositories>
 	<dependencies>
 		<dependency>
@@ -77,8 +82,23 @@
 		<dependency>
 			<groupId>com.github.NovSmirnov</groupId>
 			<artifactId>moex_api_lib</artifactId>
-			<version>9742215</version>
+			<version>a780e39</version>
 		</dependency>
+		<dependency>
+			<groupId>org.springdoc</groupId>
+			<artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
+			<version>2.6.0</version>
+		</dependency>
+		<dependency>
+			<groupId>org.clojars.edbond</groupId>
+			<artifactId>talib</artifactId>
+			<version>0.5.0</version>
+		</dependency>
+		<!--		<dependency>-->
+<!--			<groupId>org.smirnovav</groupId>-->
+<!--			<artifactId>moex_api_lib</artifactId>-->
+<!--			<version>0.0.1-SNAPSHOT</version>-->
+<!--		</dependency>-->
 	</dependencies>
 	<build>
 		<plugins>
