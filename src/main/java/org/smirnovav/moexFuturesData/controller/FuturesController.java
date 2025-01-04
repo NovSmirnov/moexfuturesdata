@@ -132,6 +132,27 @@ public class FuturesController {
                 volatilityType, liquidityType, startPos, posNum);
     }
 
+    @Operation(summary = "Список спецификаций ближайших фьючерсов",
+            description = "Возвращает список спецификаций ближайших фьючерсов без сортировки." +
+                    " Ближайшим считается тот фьючерс из Asset code у которого наиболее ранняя дата экспирации относительно " +
+                    "сегодняшнего дня.")
+    @GetMapping("/nearests")
+    @ResponseBody
+    public List<FuturesFullSpecification> getAllNearestFutures(
+            @RequestParam(value = "startpos", required = false, defaultValue = "0")
+            @Parameter(description = "Позиция, с которой начинается вывод")
+            int startPos,
+            @RequestParam(value = "posnum", required = false, defaultValue = "20")
+            @Parameter(description = "Количество выводимых позиций")
+            int posNum,
+            @RequestParam(value = "assetcode", required = false, defaultValue = "all")
+            @Parameter(description = "Asset code фьючерса, по которому нужно найти фьючерс с ближайшей" +
+                            "датой экспирации, например GAZR. Если Asset code указан неверно, то возвращен" +
+                    " будет объект JSON с нулевыми полями")
+            String assetCode){
+        return responseFuturesService.findNearestFuturesList(startPos, posNum, assetCode);
+    }
+
 
 
 

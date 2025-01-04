@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+
 @Service
 public class ResponseFuturesService {
 
@@ -47,5 +48,30 @@ public class ResponseFuturesService {
                 .getAllFuturesVolatilityLiquidityList(averagingLiqPeriodInDays, atrPeriod,
                 volatilityType, liquidityType, startPosition, numberOfPositions);
         return volatilityLiquidityList;
+    }
+
+    public List<FuturesFullSpecification> findNearestFuturesList(int startPosition, int numberOfPositions,
+                                                                 String assetCode) {
+        if (assetCode.equals("all")) {
+            List<FuturesFullSpecification> specifications = dbService.findAllNearestFutures();
+            if (numberOfPositions >= 100)
+                numberOfPositions = 100;
+            int realStartPosition;
+            int finishPosition;
+            if (startPosition < specifications.size()) {
+                realStartPosition = startPosition;
+            } else {
+                realStartPosition = specifications.size() - 1;
+            }
+            if (realStartPosition + numberOfPositions < specifications.size()) {
+                finishPosition = realStartPosition + numberOfPositions;
+            } else {
+                finishPosition = specifications.size();
+            }
+            return specifications.subList(realStartPosition, finishPosition);
+
+        } else {
+            return List.of(dbService.findNearestFuturesByAssetCode(assetCode));
+        }
     }
 }

@@ -97,10 +97,10 @@ public class VolatilityUtils {
         shortList.sort(volatilityType == VolatilityType.VOL ? new VolatilityComparator() : new VolatilityLeverageComparator());
         Collections.reverse(shortList);
 
-        for (VolatilityLiquidity volatilityLiquidity : shortList) {
-            VolatilityLiquidity.VolatilityChartData c = volatilityLiquidity.getVolatilityChartData();
-            System.out.println(c.getAtrValues().size() + " - " + c.getDates().size());
-        }
+//        for (VolatilityLiquidity volatilityLiquidity : shortList) {
+//            VolatilityLiquidity.VolatilityChartData c = volatilityLiquidity.getVolatilityChartData();
+//            System.out.println(c.getAtrValues().size() + " - " + c.getDates().size());
+//        }
 
         return shortList;
     }

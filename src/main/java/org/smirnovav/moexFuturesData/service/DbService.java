@@ -9,9 +9,7 @@ import org.smirnovav.moexFuturesData.utils.Helpers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.GregorianCalendar;
-import java.util.List;
+import java.util.*;
 
 @Service
 public class DbService {
@@ -208,5 +206,60 @@ public class DbService {
 
     public List<String> getAllFuturesShortNames() {
         return futuresRepository.findAllIds();
+    }
+
+    public List<FuturesFullSpecification> findAllNearestFutures() {
+        List<AssetCodeEntity> assetCodeEntities = assetCodeRepository.findAll();
+        List<FuturesFullSpecification> futuresFullSpecifications = new ArrayList<>();
+        for (AssetCodeEntity assetCodeEntity : assetCodeEntities) {
+            futuresFullSpecifications.add(findNearestFutures(assetCodeEntity));
+        }
+        return futuresFullSpecifications;
+
+    }
+
+    public FuturesFullSpecification findNearestFutures(AssetCodeEntity assetCodeEntity) {
+        List<FuturesEntity> futuresEntities = futuresRepository.findAllByAssetCodeEntity(assetCodeEntity);
+        Calendar now = new GregorianCalendar();
+        if (!futuresEntities.isEmpty()) {
+            long difference;
+            Map<Long, FuturesEntity> differences = new HashMap<>();
+            for (FuturesEntity futures : futuresEntities) {
+                difference = futures.getLastTradeDate().getTimeInMillis() - now.getTimeInMillis();
+                if (difference > 0) {
+                    differences.put(difference, futures);
+                }
+            }
+            Set<Long> keys = differences.keySet();
+            long minDifference = Collections.min(keys);
+            FuturesEntity nearestFutures = differences.get(minDifference);
+            IntegratedFuturesInfoEntity integratedFuturesInfoEntity = IntegratedFuturesInfoEntity.builder()
+                    .assetCodeEntity(nearestFutures.getAssetCodeEntity())
+                    .boardIdEntity(nearestFutures.getBoardIdEntity())
+                    .decimalsEntity(nearestFutures.getDecimalsEntity())
+                    .futuresEntity(nearestFutures)
+                    .futuresMarketDataEntity(nearestFutures.getFuturesMarketDataEntity())
+                    .minStepEntity(nearestFutures.getMinStepEntity())
+                    .secTypeEntity(nearestFutures.getSecTypeEntity())
+                    .build();
+            return FuturesMapper.integratedEntityToFullSpecification(integratedFuturesInfoEntity);
+        }
+        return new FuturesFullSpecification();
+    }
+
+    public FuturesFullSpecification findNearestFuturesByAssetCode(String assetCode) {
+        AssetCodeEntity assetCodeEntity = assetCodeRepository.findById(assetCode).orElse(AssetCodeEntity.builder()
+                .assetCode(assetCode)
+                .build());
+        return findNearestFutures(assetCodeEntity);
+    }
+
+    public List<String> getAllAssetCodes() {
+        List<AssetCodeEntity> allAssetCodeEntities = assetCodeRepository.findAll();
+        List<String> assetCodes = new ArrayList<>();
+        for (AssetCodeEntity assetCodeEntity : allAssetCodeEntities) {
+            assetCodes.add(assetCodeEntity.getAssetCode());
+        }
+        return assetCodes;
     }
 }

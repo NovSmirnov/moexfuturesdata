@@ -8,7 +8,7 @@ import io.swagger.v3.oas.annotations.info.Info;
         info = @Info(
                 title = "MOEX Futures information Api",
                 description = "API информационной системы, описывающей фьючерсы, торгуемые на Московской бирже",
-                version = "0.0.1-SNAPSHOT",
+                version = "0.0.1-SNAPSHOT-3",
                 contact = @Contact(
                         name = "Alexandr Smirnov",
                         email = "noMail@nomail.ru",
